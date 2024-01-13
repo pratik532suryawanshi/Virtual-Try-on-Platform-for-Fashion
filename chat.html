@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Try-On Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .chat-messages {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+        }
+
+        .user-message {
+            text-align: right;
+        }
+
+        .user-message .message-bubble {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 10px 10px 0 10px;
+        }
+
+        .bot-message .message-bubble {
+            background-color: #e5e5ea;
+            color: #333;
+            border-radius: 10px 10px 10px 0;
+        }
+
+        .message-bubble {
+            padding: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .user-input {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #e5e5ea;
+        }
+
+        .user-input input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .user-input button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Virtual Try-On Chat</h2>
+        </div>
+        <div class="chat-messages">
+            <div class="message user-message">
+                <div class="message-bubble">Hi there! How can I assist you today?</div>
+            </div>
+            <div class="message bot-message">
+                <div class="message-bubble">Hello! I'm here to help you try on virtual products.</div>
+            </div>
+        </div>
+        <div class="user-input">
+            <input type="text" placeholder="Type your message...">
+            <button>Send</button>
+        </div>
+        
+    </div>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (head content remains the same) ... -->
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Virtual Try-On Chat</h2>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Existing chat messages here -->
+        </div>
+        <div class="user-input">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById("chat-messages");
+        const userInput = document.getElementById("user-input");
+        const sendButton = document.getElementById("send-button");
+
+        // Function to add a user message to the chat
+        function addUserMessage(message) {
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user-message");
+            userMessage.innerHTML = `
+                <div class="message-bubble">${message}</div>
+            `;
+            chatMessages.appendChild(userMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+        }
+
+        // Function to add a bot message to the chat
+        function addBotMessage(message) {
+            const botMessage = document.createElement("div");
+            botMessage.classList.add("message", "bot-message");
+            botMessage.innerHTML = `
+                <div class="message-bubble">${message}</div>
+            `;
+            chatMessages.appendChild(botMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+        }
+
+        // Function to handle user input and simulate a bot response (replace with actual logic)
+        function handleUserInput() {
+            const userText = userInput.value;
+            if (userText.trim() === "") return;
+
+            addUserMessage(userText);
+            userInput.value = ""; // Clear the input field
+
+            // Simulate a bot response (replace with your own chatbot logic)
+            setTimeout(() => {
+                addBotMessage("I'm a virtual assistant. How can I assist you?");
+            }, 1000);
+        }
+
+        // Event listener for the send button
+        sendButton.addEventListener("click", handleUserInput);
+
+        // Event listener for the Enter key in the input field
+        userInput.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                handleUserInput();
+            }
+        });
+
+        // Initial bot message
+        setTimeout(() => {
+            addBotMessage("Hello! I'm here to help you try on virtual products.");
+        }, 1000);
+    </script>
+</body>
+</html>

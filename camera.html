@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Try-On - Camera</title>
+</head>
+<body>
+    <h1>Virtual Try-On - Camera</h1>
+    <video id="cameraFeed" autoplay></video>
+    <canvas id="outputCanvas" width="640" height="480"></canvas>
+
+    <script>
+        const cameraFeed = document.getElementById('cameraFeed');
+        const outputCanvas = document.getElementById('outputCanvas');
+        const outputCtx = outputCanvas.getContext('2d');
+        let stream;
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(videoStream => {
+                stream = videoStream;
+                cameraFeed.srcObject = videoStream;
+            })
+            .catch(error => {
+                console.error('Camera access error:', error);
+            });
+
+        const socket = new WebSocket('ws://your-server-url'); // Replace with your WebSocket server URL
+
+        // Handle incoming data from the server
+        socket.addEventListener('message', event => {
+            const data = JSON.parse(event.data);
+            if (data.faces) {
+                drawFaces(data.faces);
+            }
+        });
+
+        function drawFaces(faces) {
+            outputCtx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+
+            for (const face of faces) {
+                const { x, y, width, height } = face;
+                outputCtx.strokeStyle = 'green';
+                outputCtx.lineWidth = 2;
+                outputCtx.strokeRect(x, y, width, height);
+            }
+        }
+
+        // Close the camera stream and WebSocket connection when the page is closed or refreshed
+        window.addEventListener('beforeunload', () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.close();
+            }
+        });
+    </script>
+</body>
+</html>
+
+

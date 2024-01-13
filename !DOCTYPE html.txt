@@ -1,0 +1,39 @@
+6<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Try-On Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Virtual Try-On Platform</h1>
+    </header>
+    <section class="features">
+        <div class="feature">
+            <img src="glasses.png" alt="Virtual Try-On Glasses">
+            <h2>Try On Glasses</h2>
+            <p>See how different glasses frames look on your face before you buy.</p>
+        </div>
+        <div class="feature">
+            <img src="clothing.png" alt="Virtual Try-On Clothing">
+            <h2>Try On Clothing</h2>
+            <p>Try on virtual outfits to find your perfect style.</p>
+        </div>
+        <div class="feature">
+            <img src="makeup.png" alt="Virtual Try-On Makeup">
+            <h2>Try On Makeup</h2>
+            <p>Experiment with different makeup looks to enhance your beauty.</p>
+        </div>
+    </section>
+    <section class="cta">
+        <h2>Start Trying On Virtually Today!</h2>
+        <p>Experience the future of online shopping.</p>
+        <button>Get Started</button>
+    </section>
+    <footer>
+        <p>&copy; 2023 Virtual Try-On Platform</p>
+    </footer>
+</body>
+</html>

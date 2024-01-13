@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Try-On</title>
+    <style>
+    body {
+  background-image: url('background 2.jpg');
+}
+h1 {text-align: center;}
+        
+        
+        /* Styles for the navigation bar */
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Style the navigation links on hover */
+        nav ul li a:hover {
+            border-bottom: 2px solid white;
+        }
+
+        /* Additional styles for the page content */
+        #productCatalog {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Add more CSS styles as needed */
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="C:\Users\ADMIN\Desktop\Implement\home.html">Home</a></li>
+            <li><a href="#camera" id="cameraLink">Camera</a></li> <!-- Updated link with an id -->
+            <li><a href="C:\Users\ADMIN\Desktop\Implement\products.html">Products</a></li>
+            <li><a href="C:\Users\ADMIN\Desktop\Implement\About us.html">About Us</a></li>
+            <li><a href="C:\Users\ADMIN\Desktop\Implement\Register.html">Register</a></li>
+            <li><a href="C:\Users\ADMIN\Desktop\Implement\favourites.html">Favourites</a></li>
+            <li><a href="C:\Users\ADMIN\Desktop\Implement\Search.html">Search</a></li>
+            <li><a href="C:\Users\ADMIN\Desktop\Implement\chat.html">Chat</a></li>
+
+            <!-- Add more navigation links here -->
+        </ul>
+    </nav>
+    
+
+    <h1 id="home">Virtual Try-On Platform</h1>
+    <!-- Video element for the camera feed -->
+    <video id="cameraFeed" autoplay style="display: none;"></video>
+    <div id="productCatalog">
+        
+        <!-- Add  products here -->
+
+
+    </div>
+
+    <script>
+        const cameraFeed = document.getElementById('cameraFeed');
+        const cameraLink = document.getElementById('cameraLink'); // Get the Camera link element
+        
+        cameraLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent the default behavior of the link
+            
+            // Activate the camera feed (if not already active)
+            if (!cameraFeed.srcObject) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        cameraFeed.srcObject = stream;
+                        cameraFeed.style.display = 'block'; // Display the camera feed
+                    })
+                    .catch(error => {
+                        console.error('Camera access error:', error);
+                    });
+            }
+            
+            // Scroll to the camera section
+            const cameraSection = document.getElementById('camera');
+            cameraSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        const products = document.querySelectorAll('.product');
+        products.forEach(product => {
+            product.addEventListener('click', () => {
+                // Apply the selected product to the camera feed (not shown here)
+            });
+        });
+
+        // Assume you have a function that can analyze body shape and size
+function analyzeBody(cameraFeed) {
+    // Use your trained model to analyze the camera feed
+    const bodyData = yourBodyAnalysisFunction(cameraFeed);
+    
+    // Process the results and update your UI accordingly
+    // For example, you can display recommendations for clothing based on body shape
+    // or provide size recommendations.
+}
+
+// Add an event listener to analyze the camera feed when a button is clicked
+const analyzeButton = document.getElementById('analyzeButton');
+analyzeButton.addEventListener('click', () => {
+    analyzeBody(cameraFeed);
+});
+
+    </script>
+</body>
+</html>
